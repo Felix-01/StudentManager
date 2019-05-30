@@ -1,0 +1,33 @@
+﻿@model IEnumerable<StudentManager.Models.ViewModels.StudentCourses>
+
+@{
+    ViewBag.Title = "StudentAndCourseList";
+}
+
+<h4>Student And Course List</h4>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>       
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+    </tr>
+}
+
+</table>

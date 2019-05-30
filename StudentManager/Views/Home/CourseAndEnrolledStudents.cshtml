@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StudentManager.Models.ViewModels.StudentCourses>
+
+@{
+    ViewBag.Title = "CourseAndEnrolledStudents";
+}
+
+<h4>Course And Enrolled Students</h4>
+
+
+<p>
+    List of Students and Enrolled Courses
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Enter Course Code: @Html.TextBox("courseId", null, new { @class = "form-control" })
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentName)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-md-10">
+        <input type="submit" value="Get List" class="btn btn-block" />
+    </div>
+}

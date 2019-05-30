@@ -1,0 +1,69 @@
+﻿@model List<StudentManager.Models.ViewModels.StudentCourses>
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<h4>Select courses to enrol for</h4>
+@using (Html.BeginForm())
+{  
+
+<p>
+    Student Id: @Html.TextBox("studentId", null, new { @class = "form-control" })    
+</p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CourseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[1].TeacherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[2].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[3].EndDate)
+            </th>
+            <th>Select</th>
+        </tr>
+
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem[i].CourseCode)
+                    @Html.HiddenFor(modelItem => modelItem[i].CourseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem[i].CourseName)
+                    @Html.HiddenFor(modelItem => modelItem[i].CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem[i].TeacherName)
+                    @Html.HiddenFor(modelItem => modelItem[i].TeacherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem[i].StartDate)
+                    @Html.HiddenFor(modelItem => modelItem[i].StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem[i].EndDate)
+                    @Html.HiddenFor(modelItem => modelItem[i].EndDate)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => modelItem[i].IsEnroled)
+                    @Html.HiddenFor(modelItem => modelItem[i].IsEnroled)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-md-10">
+        <input type="submit" value="Add" class="btn btn-block" />
+    </div>
+}

@@ -1,0 +1,90 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<StudentManager.Models.Student>
+
+@*@{
+    ViewBag.Title = "Index";
+}*@
+
+<h4>Currently Registered Students</h4>
+
+<p>
+    @Html.ActionLink("Register New Student", "Create")
+</p>
+<p>
+    @using (Html.BeginForm("Index","Students", FormMethod.Get))
+    {               
+        @Html.TextBox("Search") <input type="submit" value="Search" class="btn btn-sm btn-default" />
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Surname)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address3)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="7">No result match your search term</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address3)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StudentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
+            </td>
+        </tr>
+        }
+
+    }
+
+</table>
+@Html.PagedListPager(Model, page =>Url.Action("Index", new { page, search = Request.QueryString["search"]}),
+    new PagedListRenderOptions() {Display = PagedListDisplayMode.IfNeeded })
